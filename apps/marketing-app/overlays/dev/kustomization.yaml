@@ -5,5 +5,5 @@ resources:
   - namespace.yaml
 
 images:
-  - name: europe-west1-docker.pkg.dev/TON-PROJECT-ID/TON-REPO/marketing-app
+  - name: europe-west1-docker.pkg.dev/pfe-devsecops-490219/marketing-repo/marketing-app:latest
     newTag: "1"
