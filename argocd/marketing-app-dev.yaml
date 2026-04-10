@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/TON-USERNAME/pfe-devsecops-gitops.git
+    repoURL: https://github.com/shaima28/pfe-devsecops-gitops.git
     targetRevision: main
     path: apps/marketing-app/overlays/dev
   destination:
