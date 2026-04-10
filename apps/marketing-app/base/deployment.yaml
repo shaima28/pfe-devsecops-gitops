@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: marketing-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: marketing-app
+  template:
+    metadata:
+      labels:
+        app: marketing-app
+    spec:
+      containers:
+        - name: marketing-app
+          image: europe-west1-docker.pkg.dev/TON-PROJECT-ID/TON-REPO/marketing-app:1
+          ports:
+            - containerPort: 8080

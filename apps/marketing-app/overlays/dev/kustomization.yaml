@@ -1,0 +1,9 @@
+namespace: marketing-dev
+
+resources:
+  - ../../base
+  - namespace.yaml
+
+images:
+  - name: europe-west1-docker.pkg.dev/TON-PROJECT-ID/TON-REPO/marketing-app
+    newTag: "1"
