@@ -6,4 +6,4 @@ resources:
 
 images:
   - name: europe-west1-docker.pkg.dev/pfe-devsecops-490219/dev-docker-repo/livestream-server
-    newTag: dffdd137d654427438888406d2a4c64f4e9f85d5
+    newTag: e9e9d6562887a5948f59c7905e2f5b00ab2cc15a
