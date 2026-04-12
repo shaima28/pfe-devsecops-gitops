@@ -6,8 +6,8 @@ namespace: marketing-dev
 resources:
   - ../../base
   - namespace.yaml
+  - certificate.yaml
 
 images:
   - name: europe-west1-docker.pkg.dev/pfe-devsecops-490219/dev-docker-repo/livestream-server
     newTag: latest
-
