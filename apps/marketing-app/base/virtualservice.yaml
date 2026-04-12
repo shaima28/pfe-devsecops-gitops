@@ -8,10 +8,7 @@ spec:
   gateways:
     - marketing-app-gateway
   http:
-    - match:
-        - uri:
-            prefix: /
-      route:
+    - route:
         - destination:
             host: marketing-app
             port:

@@ -12,12 +12,13 @@ spec:
         protocol: HTTP
       hosts:
         - pfechaima.duckdns.org
+
     - port:
         number: 443
         name: https
         protocol: HTTPS
       tls:
         mode: SIMPLE
-        credentialName: pfechaima-tls
+        credentialName: pfechaima-tls-secret
       hosts:
         - pfechaima.duckdns.org
