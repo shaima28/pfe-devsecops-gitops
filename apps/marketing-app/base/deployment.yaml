@@ -16,4 +16,4 @@ spec:
         - name: marketing-app
           image: europe-west1-docker.pkg.dev/pfe-devsecops-490219/dev-docker-repo/livestream-server:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
