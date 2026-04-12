@@ -4,7 +4,7 @@ metadata:
   name: marketing-app-vs
 spec:
   hosts:
-    - pfechaima.duckdns.org
+    - placeholder.com
   gateways:
     - marketing-app-gateway
   http:

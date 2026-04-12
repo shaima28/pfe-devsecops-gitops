@@ -11,7 +11,7 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - placeholder.com
+        - pfechaima.duckdns.org
       tls:
         httpsRedirect: true
 
@@ -20,7 +20,7 @@ spec:
         name: https
         protocol: HTTPS
       hosts:
-        - placeholder.com
+        - pfechaima.duckdns.org
       tls:
         mode: SIMPLE
-        credentialName: placeholder-tls
+        credentialName: pfechaima-tls

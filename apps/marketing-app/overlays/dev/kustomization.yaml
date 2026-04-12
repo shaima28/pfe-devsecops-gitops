@@ -8,6 +8,11 @@ resources:
   - namespace.yaml
   - certificate.yaml
 
+patches:
+  - path: patch-gateway.yaml
+  - path: patch-virtualservice.yaml
+
 images:
   - name: europe-west1-docker.pkg.dev/pfe-devsecops-490219/dev-docker-repo/livestream-server
     newTag: b178e67a0f8615695bf1d97a569fa6bc36319c67
+
