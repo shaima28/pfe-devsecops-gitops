@@ -6,6 +6,19 @@ spec:
   validationFailureAction: Audit
   background: true
   rules:
+    - name: require-image-tag
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "An image tag is required."
+        foreach:
+          - list: "request.object.spec.containers"
+            pattern:
+              image: "*:*"
+
     - name: validate-image-tag
       match:
         any:
@@ -16,9 +29,5 @@ spec:
         message: "Using the 'latest' tag is not allowed."
         foreach:
           - list: "request.object.spec.containers"
-            deny:
-              conditions:
-                any:
-                  - key: "{{ element.image }}"
-                    operator: EndsWith
-                    value: ":latest"
+            pattern:
+              image: "!*:latest"
