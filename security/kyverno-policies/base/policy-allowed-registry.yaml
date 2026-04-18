@@ -1,0 +1,20 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: allowed-image-registries
+spec:
+  validationFailureAction: Audit
+  background: true
+  rules:
+    - name: restrict-image-registries
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "Images must come only from the approved Artifact Registry repository."
+        pattern:
+          spec:
+            containers:
+              - image: "europe-west1-docker.pkg.dev/pfe-devsecops-490219/dev-docker-repo/*"
