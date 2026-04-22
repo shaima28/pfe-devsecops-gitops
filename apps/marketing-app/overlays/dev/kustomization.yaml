@@ -14,5 +14,5 @@ patches:
 
 images:
   - name: europe-west1-docker.pkg.dev/pfe-devsecops-490219/dev-docker-repo/livestream-server
-    newTag: ab3f606350fc78eaf8deeef46bd9e5def12edbdb
+    newTag: f9b4ec7de8bec186e9dd3394d5771421682af248
 
