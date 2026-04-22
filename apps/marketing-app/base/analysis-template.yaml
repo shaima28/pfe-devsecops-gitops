@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: marketing-app-health-check
+  namespace: marketing-dev
+spec:
+  metrics:
+    - name: preview-health
+      successCondition: result == true
+      failureLimit: 1
+      provider:
+        web:
+          url: "http://marketing-app-preview.marketing-dev.svc.cluster.local/health"
+          timeoutSeconds: 10
+          jsonPath: "{$.ok}"

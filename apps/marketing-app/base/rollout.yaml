@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: marketing-app
+  namespace: marketing-dev
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: marketing-app
+  template:
+    metadata:
+      labels:
+        app: marketing-app
+    spec:
+      containers:
+        - name: marketing-app
+          image: europe-west1-docker.pkg.dev/pfe-devsecops-490219/dev-docker-repo/livestream-server:blue-v1
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+  strategy:
+    blueGreen:
+      activeService: marketing-app-active
+      previewService: marketing-app-preview
+      autoPromotionSeconds: 20
+      scaleDownDelaySeconds: 30
+      prePromotionAnalysis:
+        templates:
+          - templateName: marketing-app-health-check

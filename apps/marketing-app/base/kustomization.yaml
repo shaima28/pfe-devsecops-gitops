@@ -2,9 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - deployment-blue.yaml
-  - deployment-green.yaml
-  - service-blue.yaml
-  - service-green.yaml
-  - gateway.yaml
+  - service-active.yaml
+  - service-preview.yaml
+  - analysis-template.yaml
+  - rollout.yaml
   - virtualservice.yaml

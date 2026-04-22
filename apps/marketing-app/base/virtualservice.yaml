@@ -2,20 +2,15 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: marketing-app-vs
+  namespace: marketing-dev
 spec:
   hosts:
-    - placeholder.com
+    - pfechaima.duckdns.org
   gateways:
     - marketing-app-gateway
   http:
     - route:
         - destination:
-            host: marketing-app-blue
+            host: marketing-app-active
             port:
               number: 80
-          weight: 100
-        - destination:
-            host: marketing-app-green
-            port:
-              number: 80
-          weight: 0
