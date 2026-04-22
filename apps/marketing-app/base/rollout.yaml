@@ -6,31 +6,11 @@ metadata:
 spec:
   replicas: 2
   revisionHistoryLimit: 2
+
   selector:
     matchLabels:
       app: marketing-app
-  template:
-    metadata:
-      labels:
-        app: marketing-app
-    spec:
-      containers:
-        - name: marketing-app
-          image: europe-west1-docker.pkg.dev/pfe-devsecops-490219/dev-docker-repo/livestream-server:blue-v1
-          ports:
-            - containerPort: 3000
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 3000
-            initialDelaySeconds: 5
-            periodSeconds: 5
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 3000
-            initialDelaySeconds: 10
-            periodSeconds: 10
+
   strategy:
     blueGreen:
       activeService: marketing-app-active
@@ -40,3 +20,54 @@ spec:
       prePromotionAnalysis:
         templates:
           - templateName: marketing-app-health-check
+
+  template:
+    metadata:
+      labels:
+        app: marketing-app
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+
+      containers:
+        - name: marketing-app
+          image: europe-west1-docker.pkg.dev/pfe-devsecops-490219/dev-docker-repo/livestream-server:ab3f606350fc78eaf8deeef46bd9e5def12edbdb
+
+          ports:
+            - containerPort: 3000
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1000
+            capabilities:
+              drop:
+                - ALL
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3

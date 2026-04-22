@@ -6,10 +6,9 @@ metadata:
 spec:
   metrics:
     - name: preview-health
-      successCondition: result == true
+      successCondition: result == 200
       failureLimit: 1
       provider:
         web:
-          url: "http://marketing-app-preview.marketing-dev.svc.cluster.local/health"
+          url: http://marketing-app-preview.marketing-dev.svc.cluster.local/
           timeoutSeconds: 10
-          jsonPath: "{$.ok}"
