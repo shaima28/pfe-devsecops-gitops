@@ -7,3 +7,4 @@ resources:
   - analysis-template.yaml
   - rollout.yaml
   - virtualservice.yaml
+  - gateway.yaml
