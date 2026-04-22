@@ -10,6 +10,12 @@ spec:
   http:
     - route:
         - destination:
-            host: marketing-app
+            host: marketing-app-blue
             port:
               number: 80
+          weight: 100
+        - destination:
+            host: marketing-app-green
+            port:
+              number: 80
+          weight: 0
