@@ -8,3 +8,4 @@ resources:
   - rollout.yaml
   - virtualservice.yaml
   - gateway.yaml
+  - peerauthentication.yaml
