@@ -3,7 +3,7 @@ kind: ClusterPolicy
 metadata:
   name: allowed-image-registries
 spec:
-  validationFailureAction: Audit
+  validationFailureAction: Enforce
   background: true
   rules:
     - name: restrict-image-registries
@@ -13,8 +13,8 @@ spec:
               kinds:
                 - Pod
       validate:
-        message: "Images must come only from the approved Artifact Registry repository."
+        message: "Only Artifact Registry images are allowed."
         pattern:
           spec:
             containers:
-              - image: "europe-west1-docker.pkg.dev/pfe-devsecops-490219/dev-docker-repo/*"
+              - image: "europe-west1-docker.pkg.dev/*"
