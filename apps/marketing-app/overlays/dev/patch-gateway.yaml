@@ -13,8 +13,7 @@ spec:
         protocol: HTTP
       hosts:
         - pfechaima.duckdns.org
-      tls:
-        httpsRedirect: true
+      
 
     - port:
         number: 443
