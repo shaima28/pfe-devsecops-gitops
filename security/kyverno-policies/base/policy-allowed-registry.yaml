@@ -12,6 +12,15 @@ spec:
           - resources:
               kinds:
                 - Pod
+      exclude:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              namespaces:
+                - istio-system
+              names:
+                - "cm-acme-http-solver-*"
       validate:
         message: "Only Artifact Registry images are allowed."
         pattern:
