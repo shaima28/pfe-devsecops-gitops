@@ -6,7 +6,7 @@ namespace: marketing-dev
 resources:
   - ../../base
   - namespace.yaml
-  - certificate.yaml
+  
 
 patches:
   - path: patch-gateway.yaml
