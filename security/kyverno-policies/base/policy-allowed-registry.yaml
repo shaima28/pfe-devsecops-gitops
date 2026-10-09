@@ -21,6 +21,14 @@ spec:
                 - istio-system
               names:
                 - "cm-acme-http-solver-*"
+
+          # Exception pour Policy Reporter
+          - resources:
+              kinds:
+                - Pod
+              namespaces:
+                - policy-reporter
+
       validate:
         message: "Only Artifact Registry images are allowed."
         pattern:
