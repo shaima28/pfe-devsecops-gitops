@@ -6,9 +6,47 @@ metadata:
 spec:
   metrics:
     - name: preview-health
-      successCondition: result == 200
       failureLimit: 1
       provider:
-        web:
-          url: http://marketing-app-preview.marketing-dev.svc.cluster.local/
-          timeoutSeconds: 10
+        job:
+          spec:
+            backoffLimit: 1
+            template:
+              metadata:
+                annotations:
+                  sidecar.istio.io/inject: "true"
+              spec:
+                restartPolicy: Never
+                containers:
+                  - name: health-check
+                    image: europe-west1-docker.pkg.dev/pfe-devsecops-490219/dev-docker-repo/livestream-server:311b076db4984152f6ffd2aca5010ea2cf87d793
+                    command:
+                      - node
+                      - -e
+                      - |
+                        const http = require('http');
+                        const url = 'http://marketing-app-preview.marketing-dev.svc.cluster.local/';
+                        http.get(url, {timeout: 10000}, (res) => {
+                          console.log('HTTP status:', res.statusCode);
+                          res.resume();
+                          process.exit(res.statusCode === 200 ? 0 : 1);
+                        }).on('error', (err) => {
+                          console.error(err.message);
+                          process.exit(1);
+                        }).on('timeout', () => {
+                          console.error('Health check timeout');
+                          process.exit(1);
+                        });
+                    resources:
+                      requests:
+                        cpu: 50m
+                        memory: 64Mi
+                      limits:
+                        cpu: 200m
+                        memory: 128Mi
+                    securityContext:
+                      runAsNonRoot: true
+                      runAsUser: 1000
+                      allowPrivilegeEscalation: false
+                      capabilities:
+                        drop: ["ALL"]
