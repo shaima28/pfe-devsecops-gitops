@@ -12,6 +12,8 @@ spec:
           - resources:
               kinds:
                 - Pod
+              namespaces:
+                - marketing-dev
       exclude:
         any:
           - resources:
